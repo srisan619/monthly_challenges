@@ -31,7 +31,7 @@ def index(request):
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return render(request, "challenges/challenges.html")
+        return render(request, "challenges/challenges.html", {"text": challenge_text, "title": 'Monthly Challenge', "month_name": month.capitalize()})
         # response_data = render_to_string("challenges/challenges.html")
         # return HttpResponse(response_data)
     except:
