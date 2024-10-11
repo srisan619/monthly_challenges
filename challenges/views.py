@@ -13,25 +13,25 @@ monthly_challenges = {
     "june": "Travel somewhere in the world",
     "july": "Go to Yoga practice for every week",
     "august": "Travel somewhere in the world",
-    "september": "Go to Yoga practice for every week",
+    "september": None,
     "october": "Travel somewhere in the world",
     "november": "Go to Yoga practice for every week",
     "december": "Travel somewhere in the world"
 }
 
 def index(request):
-    list_items = ""
     months = list(monthly_challenges.keys())
-    for month in months:
-        month_path = reverse("month-challenge", args=[month])
-        list_items += f"<li><a href=\"{month_path}\">{month.capitalize()}</a></li>"
-    response_data = f"<ul>{list_items}</ul>"
-    return HttpResponse(response_data)
+    return render(request, "challenges/index.html", { "months": months })
+    # for month in months:
+    #     month_path = reverse("month-challenge", args=[month])
+    #     list_items += f"<li><a href=\"{month_path}\">{month}</a></li>"
+    # response_data = f"<ul>{list_items}</ul>"
+    # return HttpResponse(response_data)
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return render(request, "challenges/challenges.html", {"text": challenge_text, "title": 'Monthly Challenge', "month_name": month.capitalize()})
+        return render(request, "challenges/challenges.html", {"text": challenge_text, "title": 'Monthly Challenge', "month_name": month})
         # response_data = render_to_string("challenges/challenges.html")
         # return HttpResponse(response_data)
     except:
